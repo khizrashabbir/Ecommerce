@@ -1,0 +1,37 @@
+
+    <!-- BEGIN category-item -->
+                    <div class="category-item list" id="phoneid">
+                        <!-- BEGIN item-row -->
+                    {% if phone %}
+                        {% for Phone_categories in phone %}
+
+                            <div class="item-row">
+                                <!-- BEGIN item -->
+
+                                <div class="item item-thumbnail">
+                                    <a href="product_detail.html" class="item-image">
+                                        {#                                        <img src="{% static 'assets/img/iphone.png' %}" alt="" />#}
+                                        <img src="{{ Phone_categories.image.url }}" alt=""/>
+                                        <div class="discount">15% OFF</div>
+                                    </a>
+                                    <div class="item-info">
+                                        <h4 class="item-title">
+                                            {#                                            <a href="product_detail.html">iPhone 6s Plus<br />16GB</a>#}
+                                            <a href="product_detail.html">{{ Phone_categories.name }}</a>
+
+                                        </h4>
+                                        {#                                        <p class="item-desc">3D Touch. 12MP photos. 4K video.</p>#}
+                                        <p class="item-desc">{{ Phone_categories.description }}</p>
+                                        <div class="item-price">{{ Phone_categories.new_price }}</div>
+                                        <div class="item-discount-price">{{ Phone_categories.off_price }}</div>
+                                    </div>
+                                </div>
+
+                                <!-- END item -->
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <h1>no item</h1>
+                    {% endif %}
+                    </div>
+                    <!-- END category-item -->
