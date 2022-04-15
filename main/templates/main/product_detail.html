@@ -43,9 +43,10 @@
                         <!-- BEGIN product-info -->
 
                         <div class="product-info">
+                            {% for product_info in product %}
                             <!-- BEGIN product-info-header -->
                             <div class="product-info-header">
-                                <h1 class="product-title"><span class="label label-success">41% OFF</span> {{ prodspec.name }} </h1>
+                                <h1 class="product-title"><span class="label label-success">41% OFF</span> {{ product_info.name }} </h1>
                                 <ul class="product-category">
                                     <li><a href="#">iPhone</a></li>
                                     <li>/</li>
@@ -88,15 +89,16 @@
                             <!-- BEGIN product-purchase-container -->
                             <div class="product-purchase-container">
                                 <div class="product-discount">
-                                    <span class="discount">{{ product.new_price }}</span>
+                                    <span class="discount">{{ product_info.new_price }}</span>
                                 </div>
                                 <div class="product-price">
-                                    <div class="price">{{ prodspec.off_price }}</div>
+                                    <div class="price">{{ product_info.off_price }}</div>
                                 </div>
                                 <button class="btn btn-inverse btn-lg" type="submit">ADD TO CART</button>
                             </div>
                             <!-- END product-purchase-container -->
                         </div>
+                                {% endfor %}
                         <!-- END product-info -->
 
                     </div>

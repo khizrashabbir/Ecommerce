@@ -62,11 +62,14 @@ def filter_product_ajax_tab(request, id):
 def productDetail(request, id):
     context = {}
     try:
-        # context["in_products"] = Product.objects.all()[:6]
-        # context["product_specification"] = ProductDescription.objects.get(id = Product.id, product__category_id=id)
-        # context["product_specification"] = ProductDescription.objects.filter(id =Product.id)
-        # context["product_specification"] = ProductDescription.objects.all()
+        context["in_products"] = Product.objects.all()[:6]
+        context["product"] = Product.objects.filter(id=id)
         context["product_specification"] = ProductDescription.objects.filter(id=id)
+
+
+        # context["product_specification"] = ProductDescription.objects.get(id = Product.id, product__category_id=id)
+        # context["product_specification"] = ProductDescription.objects.filter(id =ProductDescription.id)
+        # context["product_specification"] = ProductDescription.objects.all()
         # context["product_specification"]= ProductDescription.objects.get(Product, id=id)
         # context["product_specification"] = ProductDescription.objects.filter(id)
 
