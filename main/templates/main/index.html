@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
@@ -263,16 +264,17 @@
                             <div class="item-row">
                                 <!-- BEGIN item -->
 
-                                <div class="item item-thumbnail">
-                                    <a href="product_detail.html" class="item-image">
+                                <div class="item item-thumbnail" >
+                                    <a href="{% url 'main:product_detail' Phone_categories.id%}" class="item-image">
                                         {#                                        <img src="{% static 'assets/img/iphone.png' %}" alt="" />#}
                                         <img src="{{ Phone_categories.image.url }}" alt=""/>
                                         <div class="discount">15% OFF</div>
                                     </a>
                                     <div class="item-info">
                                         <h4 class="item-title">
-                                            {#                                            <a href="product_detail.html">iPhone 6s Plus<br />16GB</a>#}
-                                            <a href="product_detail.html">{{ Phone_categories.name }}</a>
+                                            {#  <a href="product_detail.html">iPhone 6s Plus<br />16GB</a>#}
+{#                                            <a href="{% url 'main:product_detail'  %}">{{ Phone_categories.name }}</a>#}
+                                            <a href="{% url 'main:product_detail' Phone_categories.id%}">{{ Phone_categories.name }}</a>
 
                                         </h4>
                                         {#                                        <p class="item-desc">3D Touch. 12MP photos. 4K video.</p>#}

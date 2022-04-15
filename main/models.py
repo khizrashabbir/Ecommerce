@@ -6,12 +6,11 @@ from django.urls import reverse
 
 
 class Product(models.Model):
-
     name = models.CharField(max_length=30)
     image = models.ImageField(upload_to='new', null=True, blank=True)
     description = models.CharField(max_length=100)
-    new_price = models.IntegerField(max_length=30 , null=True, blank=True)
-    off_price = models.IntegerField(max_length=30, null=True, blank=True)
+    new_price = models.IntegerField(null=True, blank=True)
+    off_price = models.IntegerField(null=True, blank=True)
     category = models.ForeignKey(
         'Category',
         on_delete=models.CASCADE,
@@ -46,3 +45,32 @@ class Company(models.Model):
 
     def __str__(self):
         return self.company_name
+
+
+class ProductDescription(models.Model):
+    product = models.ForeignKey(
+        'Product',
+        on_delete=models.CASCADE,
+    )
+    product_specification = models.TextField(max_length=200)
+
+    desc_name_1 = models.CharField(max_length=50)
+    desc_image_1 = models.ImageField(upload_to='new', null=True, blank=True)
+    desc_detail_1= models.TextField()
+
+    desc_name_2 = models.CharField(max_length=50 , null=True, blank=True)
+    desc_image_2 = models.ImageField(upload_to='new', null=True, blank=True)
+    desc_detail_2 = models.TextField(null=True, blank=True)
+
+    desc_name_3 = models.CharField(max_length=50 , null=True, blank=True)
+    desc_image_3 = models.ImageField(upload_to='new', null=True, blank=True)
+    desc_detail_3 = models.TextField(null=True, blank=True)
+
+    desc_name_4 = models.CharField(max_length=50 , null=True, blank=True)
+    desc_image_4 = models.ImageField(upload_to='new', null=True, blank=True)
+    desc_detail_4 = models.TextField(null=True, blank=True)
+
+    desc_name_5 = models.CharField(max_length=50, null=True, blank=True)
+    desc_image_5 = models.ImageField(upload_to='new', null=True, blank=True)
+    desc_detail_5 = models.TextField(null=True, blank=True)
+

@@ -4,6 +4,15 @@ from .forms import UserRegisterForm
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+
+# Create your views here.
+@login_required(login_url='/login/')
+def home(request):
+    return render(request, "main/index.html")
 
 
 def signup(request):
@@ -38,3 +47,10 @@ def login_request(request):
             messages.error(request, "Invalid username or password.")
     form = AuthenticationForm
     return render(request, template_name="users/login.html", context={"login_form": form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+

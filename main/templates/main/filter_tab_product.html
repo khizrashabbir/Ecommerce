@@ -1,37 +1,41 @@
-                    <div class="category-item list" id="tabid">
-                        <!-- BEGIN item-row -->
+<div class="category-item list" id="tabid">
+    <!-- BEGIN item-row -->
 
-                        {#   making changes here  #}
-                        {% for tablet_categories in tablet %}
-                            <div class="item-row">
-                                <!-- BEGIN item -->
-                                <div class="item item-thumbnail">
-                                    <a href="product_detail.html" class="item-image">
-                                        {#                                        <img src="{% static 'assets/img/ipad-pro.png' %}" alt="" />#}
-                                        <img src="{{ tablet_categories.image.url }}" alt=""/>
-                                        <div class="discount">15% OFF</div>
-                                    </a>
-                                    <div class="item-info">
-                                        <h4 class="item-title">
-                                            {#                                            <a href="product_detail.html">9.7-inch iPad Pro<br />32GB</a>#}
-                                            <a href="product_detail.html">{{ tablet_categories.name }}</a>
+    {#   making changes here  #}
+    {% if tablet %}
+    {% for tablet_categories in tablet %}
+        <div class="item-row">
+            <!-- BEGIN item -->
+            <div class="item item-thumbnail">
+                <a href="product_detail.html" class="item-image">
+                    {#<img src="{% static 'assets/img/ipad-pro.png' %}" alt="" />#}
+                    <img src="{{ tablet_categories.image.url }}" alt=""/>
+                    <div class="discount">15% OFF</div>
+                </a>
+                <div class="item-info">
+                    <h4 class="item-title">
+                        {#  <a href="product_detail.html">9.7-inch iPad Pro<br />32GB</a>#}
+                        <a href="product_detail.html">{{ tablet_categories.name }}</a>
 
-                                        </h4>
-                                        {#                                        <p class="item-desc">3D Touch. 12MP photos. 4K video.</p>#}
-                                        <p class="item-desc">{{ tablet_categories.description }}</p>
+                    </h4>
+                    {#  <p class="item-desc">3D Touch. 12MP photos. 4K video.</p>#}
+                    <p class="item-desc">{{ tablet_categories.description }}</p>
 
-                                        {#                                        <div class="item-price">$649.00</div>#}
-                                        <div class="item-price">{{ tablet_categories.new_price }}</div>
+                    {# <div class="item-price">$649.00</div>#}
+                    <div class="item-price">{{ tablet_categories.new_price }}</div>
 
-                                        {#                                        <div class="item-discount-price">$739.00</div>#}
-                                        <div class="item-discount-price">{{ tablet_categories.off_price }}</div>
+                    {# <div class="item-discount-price">$739.00</div>#}
+                    <div class="item-discount-price">{{ tablet_categories.off_price }}</div>
 
-                                    </div>
+                </div>
 
-                                </div>
-                                <!-- END item -->
-                            </div>
-                        {% endfor %}
-                        <!-- END item-row -->
+            </div>
+            <!-- END item -->
+        </div>
+    {% endfor %}
+    {% else %}
+        <h1>No item</h1>
+    {% endif %}
+    <!-- END item-row -->
 
-                    </div>
+</div>
