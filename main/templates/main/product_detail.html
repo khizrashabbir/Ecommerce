@@ -13,7 +13,11 @@
                     <li class="active">iPhone 6S Plus</li>
                 </ul>
                 <!-- END breadcrumb -->
-                {% for prodspec in product_specification %}
+{#                {% for prodspec in product_specification.id %}#}
+{#                {{ prodspec.id }}#}
+                {{ product_specification }}
+
+
                 <!-- BEGIN product -->
                 <div class="product">
                     <!-- BEGIN product-detail -->
@@ -43,7 +47,11 @@
                         <!-- BEGIN product-info -->
 
                         <div class="product-info">
-                            {% for product_info in product %}
+{#                            {% for product_info in  product.id %}#}
+{#                            {{ product_info.id }}#}
+                            {{ product }}
+
+
                             <!-- BEGIN product-info-header -->
                             <div class="product-info-header">
                                 <h1 class="product-title"><span class="label label-success">41% OFF</span> {{ product_info.name }} </h1>
@@ -66,7 +74,7 @@
                             <!-- END product-warranty -->
                             <!-- BEGIN product-info-list -->
                             <ul class="product-info-list">
-                                <li><i class="fa fa-circle"></i> {{ prodspec.product_specification}}</li>
+                                <li><i class="fa fa-circle"></i> {{ product.product_specification}}</li>
 {#                                <li><i class="fa fa-circle"></i> Fingerprint-resistant oleophobic coating</li>#}
 {#                                <li><i class="fa fa-circle"></i> A9 chip with 64-bit</li>#}
 {#                                <li><i class="fa fa-circle"></i> Ultrafast 4G LTE Advanced wireless</li>#}
@@ -89,18 +97,17 @@
                             <!-- BEGIN product-purchase-container -->
                             <div class="product-purchase-container">
                                 <div class="product-discount">
-                                    <span class="discount">{{ product_info.new_price }}</span>
+                                    <span class="discount">{{ product.new_price }}</span>
                                 </div>
                                 <div class="product-price">
-                                    <div class="price">{{ product_info.off_price }}</div>
+                                    <div class="price">{{ product.off_price }}</div>
                                 </div>
                                 <button class="btn btn-inverse btn-lg" type="submit">ADD TO CART</button>
                             </div>
                             <!-- END product-purchase-container -->
                         </div>
-                                {% endfor %}
                         <!-- END product-info -->
-
+{#                        {% endfor %}#}
                     </div>
 
                     <!-- END product-detail -->
@@ -120,24 +127,24 @@
                                 <!-- BEGIN product-desc -->
                                 <div class="product-desc">
                                     <div class="image">
-                                        <img src="{{ prodspec.desc_image_1.url }}"  />
+                                        <img src="{{ product_specification.desc_image_1.url }}"  />
 {#                                        <img src="{% static 'assets/img/product-main.jpg' %}" alt="" />#}
                                     </div>
                                     <div class="desc">
-                                        <h4>{{ prodspec.desc_name_1 }}</h4>
-                                        <p>{{ prodspec.desc_detail_1 }}</p>
+                                        <h4>{{ product_specification.desc_name_1 }}</h4>
+                                        <p>{{ product_specification.desc_detail_1 }}</p>
                                     </div>
                                 </div>
                                 <!-- END product-desc -->
                                 <!-- BEGIN product-desc -->
                                 <div class="product-desc right">
                                     <div class="image">
-                                        <img src="{{ prodspec.desc_image_2.url }}" alt="" />
+                                        <img src="{{ product_specification.desc_image_2.url }}" alt="" />
 {#                                        <img src="{% static 'assets/img/product-3dtouch.jpg' %}" alt="" />#}
                                     </div>
                                     <div class="desc">
-                                        <h4>{{ prodspec.desc_name_2 }}</h4>
-                                        <p>{{ prodspec.desc_detail_2 }}</p>
+                                        <h4>{{ product_specification.desc_name_2 }}</h4>
+                                        <p>{{ product_specification.desc_detail_2 }}</p>
                                     </div>
                                 </div>
                                 <!-- END product-desc -->
@@ -145,47 +152,50 @@
                                 <div class="product-desc">
                                     <div class="image">
 {#                                        <img src="{% static 'assets/img/product-cameras.jpg' %}" alt="" />#}
-                                        <img src="{{ prodspec.desc_image_3.url }}" />
+                                        <img src="{{ product_specification.desc_image_3.url }}" />
                                     </div>
                                     <div class="desc">
-                                        <h4>{{ prodspec.desc_name_3 }}</h4>
-                                        <p> {{ prodspec.desc_detail_3 }}</p>
+                                        <h4>{{ product_specification.desc_name_3 }}</h4>
+                                        <p> {{ product_specification.desc_detail_3 }}</p>
                                     </div>
                                 </div>
                                 <!-- END product-desc -->
                                 <!-- BEGIN product-desc -->
                                 <div class="product-desc right">
                                     <div class="image">
-                                        <img src="{{ prodspec.desc_image_4.url }}" alt="" />
+                                        <img src="{{ product_specification.desc_image_4.url }}" alt="" />
 {#                                        <img src="{% static 'assets/img/product-technology.jpg' %}" alt="" />#}
                                     </div>
                                     <div class="desc">
-                                        <h4>{{ prodspec.desc_name_4 }}</h4>
-                                        <p>{{ prodspec.desc_detail_4 }}</p>
+                                        <h4>{{ product_specification.desc_name_4 }}</h4>
+                                        <p>{{ product_specification.desc_detail_4 }}</p>
                                     </div>
                                 </div>
                                 <!-- END product-desc -->
                                 <!-- BEGIN product-desc -->
                                 <div class="product-desc">
                                     <div class="image">
-                                        <img src="{{ prodspec.desc_image_5.url }}" alt="" />
+                                        <img src="{{ product_specification.desc_image_5.url }}" alt="" />
 {#                                        <img src="{% static 'assets/img/product-design.jpg' %}" alt="" />#}
                                     </div>
                                     <div class="desc">
-                                        <h4>{{ prodspec.desc_name_5 }}</h4>
-                                        <p>{{ prodspec.desc_detail_5 }}</p>
+                                        <h4>{{ product_specification.desc_name_5 }}</h4>
+                                        <p>{{ product_specification.desc_detail_5 }}</p>
                                     </div>
                                 </div>
                                 <!-- END product-desc -->
+{#                                {% endfor %}#}
                             </div>
                             <!-- END #product-desc -->
-                            {% endfor %}
+
                             <!-- BEGIN #product-info -->
                             <div class="tab-pane fade" id="product-info">
                                 <!-- BEGIN table-responsive -->
                                 <div class="table-responsive">
                                     <!-- BEGIN table-product -->
                                     <table class="table table-product table-striped">
+{#                                        {% for product_name in product %}#}
+                                        {% for AddInfo in table_components %}
                                         <thead>
                                             <tr>
                                                 <th></th>
@@ -197,103 +207,51 @@
                                             <tr>
                                                 <td class="field">Capacity</td>
                                                 <td>
-                                                    16GB<br />
-                                                    64GB<br />
-                                                    128GB
+                                                    {{ AddInfo.capacity_1 }}
                                                 </td>
                                                 <td>
-                                                    16GB<br />
-                                                    64GB<br />
-                                                    128GB
+                                                   {{ AddInfo.capacity_2 }}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="field">Weight and Dimensions</td>
                                                 <td>
-                                                    5.44 inches (138.3 mm) x 2.64 inches (67.1 mm) x 0.28 inch (7.1 mm)<br />
-                                                    Weight: 5.04 ounces (143 grams)
+                                                    {{ AddInfo.weight_dimension_1 }}
                                                 </td>
                                                 <td>
-                                                    6.23 inches (158.2 mm) x 3.07 inches (77.9 mm) x 0.29 inch (7.3 mm)<br />
-                                                    Weight: 6.77 ounces (192 grams)
+                                                    {{ AddInfo.weight_dimension_2 }}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="field">Display</td>
                                                 <td>
-                                                    Retina HD display with 3D Touch<br />
-                                                    4.7-inch (diagonal) LED-backlit widescreen<br />
-                                                    1334-by-750-pixel resolution at 326 ppi<br />
-                                                    1400:1 contrast ratio (typical)<br />
-                                                    <br />
-                                                    <b>Both models:</b><br />
-                                                    500 cd/m2 max brightness (typical)<br />
-                                                    Full sRGB standard<br />
-                                                    Dual-domain pixels for wide viewing angles<br />
-                                                    Fingerprint-resistant oleophobic coating on front<br />
-                                                    Support for display of multiple languages and characters simultaneously<br />
-                                                    Display Zoom<br />
-                                                    Reachability
+                                                   {{ AddInfo.display_1 }}
                                                 </td>
                                                 <td>
-                                                    Retina HD display with 3D Touch<br />
-                                                    5.5-inch (diagonal) LED-backlit widescreen<br />
-                                                    1920-by-1080-pixel resolution at 401 ppi<br />
-                                                    1300:1 contrast ratio (typical)
+                                                    {{ AddInfo.display_2 }}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="field">Chip</td>
                                                 <td colspan="2">
-                                                    A9 chip with 64-bit architecture Embedded M9 motion coprocessor
+                                                    {{ AddInfo.chip_1 }}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="field">iSight Camera</td>
                                                 <td colspan="2">
-                                                    New 12-megapixel iSight camera with 1.22µ pixels<br />
-                                                    Live Photos<br />
-                                                    Autofocus with Focus Pixels<br />
-                                                    Optical image stabilization (iPhone 6s Plus only)<br />
-                                                    True Tone flash<br />
-                                                    Panorama (up to 63 megapixels)<br />
-                                                    Auto HDR for photos<br />
-                                                    Exposure control<br />
-                                                    Burst mode<br />
-                                                    Timer mode<br />
-                                                    ƒ/2.2 aperture<br />
-                                                    Five-element lens<br />
-                                                    Hybrid IR filter<br />
-                                                    Backside illumination sensor<br />
-                                                    Sapphire crystal lens cover<br />
-                                                    Auto image stabilization<br />
-                                                    Improved local tone mapping<br />
-                                                    Improved noise reduction<br />
-                                                    Face detection<br />
-                                                    Photo geotagging
+                                                    {{ AddInfo.isight_cam1 }}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="field">Video Recording</td>
                                                 <td colspan="2">
-                                                    4K video recording (3840 by 2160) at 30 fps<br />
-                                                    1080p HD video recording at 30 fps or 60 fps<br />
-                                                    720p HD video recording at 30 fps<br />
-                                                    Optical image stabilization for video (iPhone 6s Plus only)<br />
-                                                    True Tone flash<br />
-                                                    Slo-mo video support for 1080p at 120 fps and 720p at 240 fps<br />
-                                                    Time-lapse video with stabilization<br />
-                                                    Cinematic video stabilization (1080p and 720p)<br />
-                                                    Continuous autofocus video<br />
-                                                    Improved noise reduction<br />
-                                                    Take 8MP still photos while recording 4K video<br />
-                                                    Playback zoom<br />
-                                                    3x zoom<br />
-                                                    Face detection<br />
-                                                    Video geotagging
+                                                    {{ AddInfo.video_record2}}
                                                 </td>
                                             </tr>
                                         </tbody>
+                                        {% endfor %}
+{#                                        {% endfor %}#}
                                     </table>
                                     <!-- END table-product -->
                                 </div>

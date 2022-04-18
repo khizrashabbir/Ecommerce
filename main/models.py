@@ -1,6 +1,6 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
-
 
 # Create your models here.
 
@@ -56,17 +56,17 @@ class ProductDescription(models.Model):
 
     desc_name_1 = models.CharField(max_length=50)
     desc_image_1 = models.ImageField(upload_to='new', null=True, blank=True)
-    desc_detail_1= models.TextField()
+    desc_detail_1 = models.TextField()
 
-    desc_name_2 = models.CharField(max_length=50 , null=True, blank=True)
+    desc_name_2 = models.CharField(max_length=50, null=True, blank=True)
     desc_image_2 = models.ImageField(upload_to='new', null=True, blank=True)
     desc_detail_2 = models.TextField(null=True, blank=True)
 
-    desc_name_3 = models.CharField(max_length=50 , null=True, blank=True)
+    desc_name_3 = models.CharField(max_length=50, null=True, blank=True)
     desc_image_3 = models.ImageField(upload_to='new', null=True, blank=True)
     desc_detail_3 = models.TextField(null=True, blank=True)
 
-    desc_name_4 = models.CharField(max_length=50 , null=True, blank=True)
+    desc_name_4 = models.CharField(max_length=50, null=True, blank=True)
     desc_image_4 = models.ImageField(upload_to='new', null=True, blank=True)
     desc_detail_4 = models.TextField(null=True, blank=True)
 
@@ -74,3 +74,53 @@ class ProductDescription(models.Model):
     desc_image_5 = models.ImageField(upload_to='new', null=True, blank=True)
     desc_detail_5 = models.TextField(null=True, blank=True)
 
+
+class AdditionalInfo(models.Model):
+    product = models.ForeignKey(
+        'Product',
+        related_name='product1',
+        on_delete=models.CASCADE,
+        null=True, blank=True
+    )
+    product_2 = models.ForeignKey(
+        'Product',
+        on_delete=models.CASCADE,
+        null=True, blank=True
+    )
+    capacity_1 = models.CharField(max_length=50)
+    weight_dimension_1 = models.TextField()
+    display_1 = models.TextField()
+    chip_1 = models.TextField()
+    isight_cam1 = models.TextField()
+    video_record1 = models.TextField()
+
+    capacity_2 = models.CharField(max_length=50)
+    weight_dimension_2 = models.TextField()
+    display_2 = models.TextField()
+    chip_2 = models.TextField()
+    isight_cam2 = models.TextField()
+    video_record2 = models.TextField(null=True, blank=True)
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        form.base_fields["not_required"].required = False
+
+
+class Review(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        default=1
+    )
+    name = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
+    review = models.TextField()
+    RATING_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+
+    )
+    rating = models.IntegerField(choices=RATING_CHOICES , null=True, blank= True)

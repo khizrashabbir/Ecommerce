@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from django.contrib.auth.decorators import login_required
+from . import forms
+from .forms import ReviewForm
 
 
 # Create your views here.
@@ -63,9 +65,9 @@ def productDetail(request, id):
     context = {}
     try:
         context["in_products"] = Product.objects.all()[:6]
-        context["product"] = Product.objects.filter(id=id)
-        context["product_specification"] = ProductDescription.objects.filter(id=id)
-
+        context["product"] = Product.objects.get(id=id)
+        context["product_specification"] = ProductDescription.objects.get(id=id)
+        context["table_components"] = AdditionalInfo.objects.all()
 
         # context["product_specification"] = ProductDescription.objects.get(id = Product.id, product__category_id=id)
         # context["product_specification"] = ProductDescription.objects.filter(id =ProductDescription.id)
@@ -76,3 +78,21 @@ def productDetail(request, id):
     except Exception as e:
         print(e)
     return render(request, "main/product_detail.html", context)
+
+
+def add_review(request, id):
+    if request.user.is_authenticated:
+        review = Review.objects.get(id=id)
+        if request.method == "POST":
+            form = ReviewForm(request.POST or None)
+            if form.is_valid():
+                data = form.save(commit=False)
+                data.comment = request.POST["comment"]
+                data.rating = request.POST["rating"]
+                data.user = request.user
+                data.review = review
+                data.save()
+                return redirect("main:product_detail", id)
+        else:
+            form = ReviewForm()
+        return render(request, "main/product_detail.html", {"form": form})
