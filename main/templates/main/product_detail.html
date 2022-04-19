@@ -272,6 +272,7 @@
                                                 <div class="review-icon"><img src="{% static 'assets/img/user-1.jpg' %}" alt="" /></div>
                                                 <div class="review-rate">
                                                     <ul class="review-star">
+                                                        {{ form.user.as_hidden }}
                                                         <li class="active"><i class="fa fa-star"></i></li>
                                                         <li class="active"><i class="fa fa-star"></i></li>
                                                         <li class="active"><i class="fa fa-star"></i></li>
@@ -295,13 +296,16 @@
                                     {% endfor %}
                                     <!-- END col-7 -->
                                     <!-- BEGIN col-5 -->
-                                    <div class="col-md-5">
+{#                                have to be on top of page#}
+                                    <div class="col-md-5" style="margin-top: 0; padding-top: 0">
                                         <!-- BEGIN review-form -->
                                         <div class="review-form">
                                             <form action="" name="review_form" method="POST">
                                                 {% csrf_token %}
 {#                                                {{ forms.as_p }}#}
                                                 <h2>Write a review</h2>
+                                                {{ forms.user }}
+                                                {{ forms.product }}
                                                 <div class="form-group">
                                                     <label for="name">Name <span class="text-danger">*</span></label>
                                                      {{ forms.name }}
@@ -336,7 +340,7 @@
 {#                                                        <option value="8">8</option>#}
 {#                                                        <option value="10">10</option>#}
 {#                                                    </select>#}
-{#                                                </div>            #}
+                                                </div>
                                                 {{ forms.rating }}
                                                 <button type="submit" value="Submit" class="btn btn-inverse btn-lg">Submit Review</button>
                                             </form>
