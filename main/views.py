@@ -64,6 +64,15 @@ def filter_product_ajax_tab(request, id):
 def productDetail(request, id):
     context = {}
     try:
+        if request.method == 'POST':
+            form = ReviewForm(request.POST)
+            if form.is_valid():
+                form.save()
+            return redirect("main:product_detail", id)
+
+        form = ReviewForm
+        context['forms'] = form
+        context["review"] = Review.objects.all()
         context["in_products"] = Product.objects.all()[:6]
         context["product"] = Product.objects.get(id=id)
         context["product_specification"] = ProductDescription.objects.get(id=id)
@@ -79,20 +88,37 @@ def productDetail(request, id):
         print(e)
     return render(request, "main/product_detail.html", context)
 
-
-def add_review(request, id):
-    if request.user.is_authenticated:
-        review = Review.objects.get(id=id)
-        if request.method == "POST":
-            form = ReviewForm(request.POST or None)
-            if form.is_valid():
-                data = form.save(commit=False)
-                data.comment = request.POST["comment"]
-                data.rating = request.POST["rating"]
-                data.user = request.user
-                data.review = review
-                data.save()
-                return redirect("main:product_detail", id)
-        else:
-            form = ReviewForm()
-        return render(request, "main/product_detail.html", {"form": form})
+# def add_review(request, id):
+#     if request.user.is_authenticated:
+#         review = Review.objects.get(id=id)
+#         if request.method == "POST":
+#             form = ReviewForm(request.POST or None)
+#             if form.is_valid():
+#                 data = form.save(commit=False)
+#                 data.comment = request.POST["comment"]
+#                 data.rating = request.POST["rating"]
+#                 data.user = request.user
+#                 data.review = review
+#                 data.save()
+#                 return redirect("main:product_detail", id)
+#         else:
+#             form = ReviewForm()
+#         return render(request, "main/product_detail.html", {"form": form})
+#
+#     # def add_review(request, id):
+#     #     post = Movie.objects.get(id=id)
+#     #     form = ReviewForm(request.POST or None)
+#     #     if form.is_valid():
+#     #         author = request.POST.get('author')
+#     #         stars = request.POST.get('stars')
+#     #         comment = request.POST.get('comment')
+#     #         review = Review(author=author, stars=stars, comment=comment, movie=post)
+#     #         review.save()
+#     #         return redirect('success')
+#     #
+#     #     form = ReviewForm()
+#     #     context = {
+#     #         "form": form
+#     #
+#     #     }
+#     #     return render(request, 'main/product_detail.html', context)

@@ -112,8 +112,15 @@ class Review(models.Model):
         on_delete=models.CASCADE,
         default=1
     )
+
+    # product foreign key
     name = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
+    product = models.ForeignKey(
+        'Product',
+        on_delete=models.CASCADE,
+        null= True, blank=True
+    )
     review = models.TextField()
     RATING_CHOICES = (
         (1, '1'),
