@@ -10,7 +10,7 @@ from django.shortcuts import redirect
 
 
 # Create your views here.
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def home(request):
     return render(request, "main/index.html")
 
@@ -48,9 +48,10 @@ def login_request(request):
     form = AuthenticationForm
     return render(request, template_name="users/login.html", context={"login_form": form})
 
+# @login_required(login_url='/login/')
 
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('main:home')
 
 

@@ -13,8 +13,6 @@
                     <li class="active">iPhone 6S Plus</li>
                 </ul>
                 <!-- END breadcrumb -->
-{#                {% for prodspec in product_specification.id %}#}
-{#                {{ prodspec.id }}#}
                 {{ product_specification }}
 
 
@@ -47,8 +45,6 @@
                         <!-- BEGIN product-info -->
 
                         <div class="product-info">
-{#                            {% for product_info in  product.id %}#}
-{#                            {{ product_info.id }}#}
                             {{ product }}
 
 
@@ -75,12 +71,6 @@
                             <!-- BEGIN product-info-list -->
                             <ul class="product-info-list">
                                 <li><i class="fa fa-circle"></i> {{ product.product_specification}}</li>
-{#                                <li><i class="fa fa-circle"></i> Fingerprint-resistant oleophobic coating</li>#}
-{#                                <li><i class="fa fa-circle"></i> A9 chip with 64-bit</li>#}
-{#                                <li><i class="fa fa-circle"></i> Ultrafast 4G LTE Advanced wireless</li>#}
-{#                                <li><i class="fa fa-circle"></i> New 12-megapixel iSight camera</li>#}
-{#                                <li><i class="fa fa-circle"></i> 4k video recording</li>#}
-{#                                <li><i class="fa fa-circle"></i> iOS 9 with Touch ID and Apple Pay</li>#}
                             </ul>
                             <!-- END product-info-list -->
                             <!-- BEGIN product-social -->
@@ -107,7 +97,6 @@
                             <!-- END product-purchase-container -->
                         </div>
                         <!-- END product-info -->
-{#                        {% endfor %}#}
                     </div>
 
                     <!-- END product-detail -->
@@ -184,7 +173,6 @@
                                     </div>
                                 </div>
                                 <!-- END product-desc -->
-{#                                {% endfor %}#}
                             </div>
                             <!-- END #product-desc -->
 
@@ -194,7 +182,6 @@
                                 <div class="table-responsive">
                                     <!-- BEGIN table-product -->
                                     <table class="table table-product table-striped">
-{#                                        {% for product_name in product %}#}
                                         {% for AddInfo in table_components %}
                                         <thead>
                                             <tr>
@@ -251,7 +238,6 @@
                                             </tr>
                                         </tbody>
                                         {% endfor %}
-{#                                        {% endfor %}#}
                                     </table>
                                     <!-- END table-product -->
                                 </div>
@@ -273,13 +259,13 @@
                                                 <div class="review-rate">
                                                     <ul class="review-star">
                                                         {{ form.user.as_hidden }}
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li class="active"><i class="fa fa-star"></i></li>
-                                                        <li class=""><i class="fa fa-star-o"></i></li>
+                                                        <li class="active" ><i class="fa fa-star {% if reviews.rating  %} checked {% endif %}" ></i> </li>
+                                                        <li class="active"><i class="fa fa-star {% if reviews.rating  %} checked {% endif %}"></i></li>
+                                                        <li class="active"><i class="fa fa-star {% if reviews.rating  %} checked {% endif %}"></i></li>
+                                                        <li class="active"><i class="fa fa-star {% if reviews.rating  %} checked {% endif %}"></i></li>
+                                                        <li class=""><i class="fa fa-star-o {% if reviews.rating  %} checked {% endif %}"></i></li>
                                                     </ul>
-                                                    (4/5)
+                                                    {{ reviews.rating }}/5
                                                 </div>
                                                 <div class="review-name">{{ reviews.name }}</div>
                                                 <div class="review-date">24/05/2016 7:40am</div>
@@ -288,7 +274,8 @@
                                                 {{ reviews.title}}
                                             </div>
                                             <div class="review-message">
-                                                {{ reviews.review}}                                            </div>
+                                                {{ reviews.review}}
+                                            </div>
                                         </div>
                                         <!-- END review -->
 
@@ -300,11 +287,13 @@
                                     <div class="col-md-5" style="margin-top: 0; padding-top: 0">
                                         <!-- BEGIN review-form -->
                                         <div class="review-form">
-                                            <form action="" name="review_form" method="POST">
+{#                                            {%for i in ratings%}#}
+                                            <form action="" name="review_form" method="POST" >
                                                 {% csrf_token %}
 {#                                                {{ forms.as_p }}#}
                                                 <h2>Write a review</h2>
                                                 {{ forms.user }}
+
                                                 {{ forms.product }}
                                                 <div class="form-group">
                                                     <label for="name">Name <span class="text-danger">*</span></label>
@@ -321,25 +310,20 @@
                                                     {{ forms.review }}
 {#                                                    <textarea class="form-control" rows="8" id="review"></textarea>#}
                                                 </div>
+                                                <input type="text" name="inputfield" id="inputFieldForStars" value=0 hidden>
                                                 <div class="form-group">
                                                     <label for="email">Rating  <span class="text-danger">*</span></label>
                                                     <div class="rating rating-selection" data-rating="true" data-target="rating">
-                                                        <i class="fa fa-star-o" data-value="2"></i>
-                                                        <i class="fa fa-star-o" data-value="4"></i>
-                                                        <i class="fa fa-star-o" data-value="6"></i>
-                                                        <i class="fa fa-star-o" data-value="8"></i>
-                                                        <i class="fa fa-star-o" data-value="10"></i>
+                                                        <i class="fa fa-star-o" id="first" onclick="reviewStars(1)"></i>
+                                                        <i class="fa fa-star-o"  id="second" data-value="4" onclick="reviewStars(2)"></i>
+                                                        <i class="fa fa-star-o" id="third" data-value="6" onclick="reviewStars(3)"></i>
+                                                        <i class="fa fa-star-o" id="fourth" data-value="8" onclick="reviewStars(4)"></i>
+                                                        <i class="fa fa-star-o" id="fifth" data-value="10" onclick="reviewStars(5)"></i>
                                                         <span class="rating-comment">
                                                             <span class="rating-comment-tooltip">Click to rate</span>
                                                         </span>
                                                     </div>
-{#                                                    <select name="rating" class="hide">#}
-{#                                                        <option value="2">2</option>#}
-{#                                                        <option value="4">4</option>#}
-{#                                                        <option value="6">6</option>#}
-{#                                                        <option value="8">8</option>#}
-{#                                                        <option value="10">10</option>#}
-{#                                                    </select>#}
+
                                                 </div>
                                                 {{ forms.rating }}
                                                 <button type="submit" value="Submit" class="btn btn-inverse btn-lg">Submit Review</button>
@@ -403,7 +387,8 @@
         </div>
     </div>
     <!-- end theme-panel -->
-	
+
+
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="{% static 'assets/plugins/jquery/jquery-1.9.1.min.js' %}"></script>
 	<script src="{% static 'assets/plugins/jquery/jquery-migrate-1.1.0.min.js' %}"></script>
@@ -421,5 +406,13 @@
 	    $(document).ready(function() {
 	        App.init();
 	    });
+
 	</script>
+    <script>
+    function reviewStars(number){
+        $("#inputFieldForStars").val(number)
+
+    }
+
+    </script>
 {% endblock %}
