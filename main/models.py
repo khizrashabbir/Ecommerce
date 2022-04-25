@@ -126,5 +126,5 @@ class Review(models.Model):
     rating = models.IntegerField(default=0,
         validators=[
             MaxValueValidator(5),
-            MinValueValidator(1),
+            MinValueValidator(0),
         ], null=True, blank= True)

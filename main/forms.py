@@ -8,7 +8,7 @@ from .models import Review
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['name', 'user','title', 'product','review']
+        fields = ['name', 'user','title', 'product','review','rating']
 
         # def __init__(self, *args, **kwargs):
         #     super().__init__(*args, **kwargs)
@@ -21,7 +21,7 @@ class ReviewForm(forms.ModelForm):
                 'product': forms.Select(attrs={'class': 'hidden'}),
                 'title': forms.TextInput(attrs={'class':'form-control'}),
                 'review': forms.Textarea(attrs={'class':'form-control'}),
-                # 'rating': forms.NumberInput(attrs={'class': 'rating rating-selection'}),
+                'rating': forms.NumberInput(attrs={'class': 'review-star','type': 'hidden','id':'total'}),
 
         }
 

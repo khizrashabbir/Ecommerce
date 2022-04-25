@@ -258,12 +258,42 @@
                                                 <div class="review-icon"><img src="{% static 'assets/img/user-1.jpg' %}" alt="" /></div>
                                                 <div class="review-rate">
                                                     <ul class="review-star">
-                                                        {{ form.user.as_hidden }}
-                                                        <li class="active" ><i class="fa fa-star {% if reviews.rating  %} checked {% endif %}" ></i> </li>
-                                                        <li class="active"><i class="fa fa-star {% if reviews.rating  %} checked {% endif %}"></i></li>
-                                                        <li class="active"><i class="fa fa-star {% if reviews.rating  %} checked {% endif %}"></i></li>
-                                                        <li class="active"><i class="fa fa-star {% if reviews.rating  %} checked {% endif %}"></i></li>
-                                                        <li class=""><i class="fa fa-star-o {% if reviews.rating  %} checked {% endif %}"></i></li>
+{#                                                        {{ form.user.as_hidden }}#}
+                                                        {% if reviews.rating == 1 %}
+                                                            <li class="active" ><i class="fa fa-star" ></i> </li>
+                                                            <li class=""><i class="fa fa-star"></i></li>
+                                                            <li class=""><i class="fa fa-star"></i></li>
+                                                            <li class=""><i class="fa fa-star"></i></li>
+                                                            <li class=""><i class="fa fa-star-o"></i></li>
+                                                        {% endif %}
+                                                    {% if reviews.rating == 2 %}
+                                                            <li class="active" ><i class="fa fa-star" ></i> </li>
+                                                            <li class="active"><i class="fa fa-star"></i></li>
+                                                            <li class=""><i class="fa fa-star"></i></li>
+                                                            <li class=""><i class="fa fa-star"></i></li>
+                                                            <li class=""><i class="fa fa-star-o"></i></li>
+                                                        {% endif %}
+                                                    {% if reviews.rating == 3 %}
+                                                            <li class="active" ><i class="fa fa-star" ></i> </li>
+                                                            <li class="active"><i class="fa fa-star"></i></li>
+                                                            <li class="active"><i class="fa fa-star"></i></li>
+                                                            <li class=""><i class="fa fa-star"></i></li>
+                                                            <li class=""><i class="fa fa-star-o"></i></li>
+                                                        {% endif %}
+                                                    {% if reviews.rating == 4 %}
+                                                            <li class="active" ><i class="fa fa-star" ></i> </li>
+                                                            <li class="active"><i class="fa fa-star"></i></li>
+                                                            <li class="active"><i class="fa fa-star"></i></li>
+                                                            <li class="active"><i class="fa fa-star"></i></li>
+                                                            <li class=""><i class="fa fa-star-o"></i></li>
+                                                        {% endif %}
+                                                    {% if reviews.rating == 5 %}
+                                                            <li class="active" ><i class="fa fa-star" ></i> </li>
+                                                            <li class="active"><i class="fa fa-star"></i></li>
+                                                            <li class="active"><i class="fa fa-star"></i></li>
+                                                            <li class="active"><i class="fa fa-star"></i></li>
+                                                            <li class="active"><i class="fa fa-star"></i></li>
+                                                        {% endif %}
                                                     </ul>
                                                     {{ reviews.rating }}/5
                                                 </div>
@@ -314,11 +344,11 @@
                                                 <div class="form-group">
                                                     <label for="email">Rating  <span class="text-danger">*</span></label>
                                                     <div class="rating rating-selection"  data-rating="true" data-target="rating">
-                                                        <i class="fa fa-star-o" id="first" data-color="red" data-rating="1" onclick="reviewStars(1)"></i>
-                                                        <i class="fa fa-star-o"  id="second" data-value="4" data-rating="2" onclick="reviewStars(2)"></i>
-                                                        <i class="fa fa-star-o" id="third" data-value="6" data-rating="3" onclick="reviewStars(3)"></i>
-                                                        <i class="fa fa-star-o" id="fourth" data-value="8" data-rating="4" onclick="reviewStars(4)"></i>
-                                                        <i class="fa fa-star-o" id="fifth" data-value="10" data-rating="5" onclick="reviewStars(5)"></i>
+                                                        <i class="fa fa-star-o" id="first" data-color="red" data-rating="1" ></i>
+                                                        <i class="fa fa-star-o"  id="second" data-value="4" data-rating="2" ></i>
+                                                        <i class="fa fa-star-o" id="third" data-value="6" data-rating="3" ></i>
+                                                        <i class="fa fa-star-o" id="fourth" data-value="8" data-rating="4" ></i>
+                                                        <i class="fa fa-star-o" id="fifth" data-value="10" data-rating="5" ></i>
                                                         <span class="rating-comment">
                                                             <span class="rating-comment-tooltip">Click to rate</span>
                                                         </span>
@@ -409,10 +439,56 @@
 
 	</script>
     <script>
-    function reviewStars(number){
-        $("#inputFieldForStars").val(number)
+    $(document).ready(function (){
+       var count=0;
+       $("#first").click(function (){
+           $("#first").css("color","orange");
+           $("#second").css("color","black");
+            $("#third").css("color","black");
+            $("#fourth").css("color","black");
+            $("#fifth").css("color","black");
+           count=1;
+           $("#total").val(count);
+       })
+        $("#second").click(function (){
+           $("#first").css("color","orange");
+           $("#second").css("color","orange");
+            $("#third").css("color","black");
+            $("#fourth").css("color","black");
+            $("#fifth").css("color","black");
+           count=2;
+           $("#total").val(count);
+       })
+        $("#third").click(function (){
+           $("#first").css("color","orange");
+           $("#second").css("color","orange");
+            $("#third").css("color","orange");
+            $("#fourth").css("color","black");
+            $("#fifth").css("color","black");
+           count=3;
+           $("#total").val(count);
+       })
+        $("#fourth").click(function (){
+           $("#first").css("color","orange");
+           $("#second").css("color","orange");
+            $("#third").css("color","orange");
+            $("#fourth").css("color","orange");
+            $("#fifth").css("color","black");
+           count=4;
+           $("#total").val(count);
+       })
+        $("#fifth").click(function (){
+           $("#first").css("color","orange");
+           $("#second").css("color","orange");
+            $("#third").css("color","orange");
+            $("#fourth").css("color","orange");
+            $("#fifth").css("color","orange");
+           count=5;
+           $("#total").val(count);
+       })
+    });
 
-    }
+
     $(document).ready(function(){
         $(".reviewStars").click(function(){
             $var =$(this).attr("data-rating");

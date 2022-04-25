@@ -68,9 +68,6 @@ def productDetail(request, id, user=None):
                     forms = form.save(commit=False)
                     forms.product = productsa
                     forms.user = request.user
-                    val = request.POST.get('inputfield')
-                    print(val)
-                    forms.rating = val
                     forms.save()
                 return redirect("main:product_detail", id)
         form = ReviewForm()
