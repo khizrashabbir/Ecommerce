@@ -10,3 +10,5 @@ admin.site.register(Company)
 admin.site.register(ProductDescription)
 admin.site.register(AdditionalInfo)
 admin.site.register(Review)
+admin.site.register(AddCart)
+

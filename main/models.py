@@ -128,3 +128,28 @@ class Review(models.Model):
             MaxValueValidator(5),
             MinValueValidator(0),
         ], null=True, blank= True)
+
+
+class AddCart(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        default=1
+    )
+    product = models.ForeignKey(
+        'Product',
+        on_delete=models.CASCADE,
+    )
+    quantity = models.IntegerField(default=1)
+    # price = models.FloatField()
+    price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    single_total = models.FloatField(null=True, blank=True)
+    # sub_total = models.FloatField(null=True, blank=True)
+    # total = models.FloatField(null=True, blank=True)
+
+# def total_price(self):
+#     return self.total_quantity * self.price
+#     print(AddCart.objects.all()[0].total_price)
+
+
+

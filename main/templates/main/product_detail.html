@@ -92,7 +92,14 @@
                                 <div class="product-price">
                                     <div class="price">{{ product.off_price }}</div>
                                 </div>
-                                <button class="btn btn-inverse btn-lg" type="submit">ADD TO CART</button>
+{#                                {% for add_cart in product_cart %}#}
+                                <form action="{% url 'main:cart_page' product.id%}" method="post">
+                                    {% csrf_token %}
+{#                                <a href="{% url 'main:cart_page' product.id%}" class="btn btn-inverse btn-lg">ADD TO CART</a>#}
+                                    <button class="btn btn-inverse btn-lg" type="submit">ADD TO CART</button>
+                                    </form>
+{#                                <button class="btn btn-inverse btn-lg" type="submit">ADD TO CART</button>#}
+{#                                {% endfor %}#}
                             </div>
                             <!-- END product-purchase-container -->
                         </div>
@@ -308,13 +315,12 @@
                                             </div>
                                         </div>
                                         <!-- END review -->
-
                                     </div>
                                     {% endfor %}
                                     <!-- END col-7 -->
                                     <!-- BEGIN col-5 -->
 {#                                have to be on top of page#}
-                                    <div class="col-md-5" style="margin-top: 0; padding-top: 0">
+                                    <div class="col-md-5">
                                         <!-- BEGIN review-form -->
                                         <div class="review-form">
 {#                                            {%for i in ratings%}#}
@@ -355,8 +361,12 @@
                                                     </div>
 
                                                 </div>
-                                                {{ forms.rating }}
+                                                {% if request.user.is_authenticated %}
+                                                    {{ forms.rating }}
                                                 <button type="submit" value="Submit" class="btn btn-inverse btn-lg">Submit Review</button>
+                                                {% else %}
+                                                    <a  href="{% url 'login' %}" class="btn btn-inverse btn-lg">login</a>
+                                                {% endif %}
                                             </form>
                                         </div>
                                         <!-- END review-form --> 
@@ -402,7 +412,7 @@
             <!-- END container -->
         </div>
         <!-- END #product -->
-    
+
     <!-- begin theme-panel -->
     <div class="theme-panel">
         <a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-cog"></i></a>
